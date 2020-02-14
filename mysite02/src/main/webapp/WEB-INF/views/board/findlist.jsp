@@ -21,11 +21,10 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="board">
-				<h1>${kwd2 }</h1>
 				<form id="search_form"
 					action="${pageContext.servletContext.contextPath }/board?a=find&page=1"
 					method="post">
-					<input type="text" id="kwd" name="kwd" value=""
+					<input type="text" id="kwd" name="kwd"
 						placeholder='제목을 입력하세요' required="required"> <input type="submit" value="찾기">
 				</form>
 				<table class="tbl-ex">
@@ -76,7 +75,7 @@
 								</c:when>
 								<c:when test="${vo.state eq 'yes' }">
 									<td style="text-align:left; padding-left:${20*vo.depth }px">
-										<img src='${image }'>삭제된 게시글입니다.
+										<img src='${image }'>${vo.title }
 									</td>
 								</c:when>
 							</c:choose>
@@ -101,18 +100,18 @@
 					<ul>
 						<c:if test="${!(param.page <= 1) }">
 							<li><a
-								href="${pageContext.request.contextPath }/board?a=list&page=${param.page-1 }">◀</a></li>
+								href="${pageContext.request.contextPath }/board?a=find&page=${param.page-1 }&kwd=${kwd }">◀</a></li>
 						</c:if>
 
 						<c:forEach begin='${select}' end='${select+4 }' var='i' step='1'>
 							<c:choose>
 								<c:when test="${select == i }">
 									<li class="selected"><a style="color: red"
-										href="${pageContext.request.contextPath }/board?a=list&page=${i }">${i }</a></li>
+										href="${pageContext.request.contextPath }/board?a=find&page=${i }&kwd=${kwd }">${i }</a></li>
 								</c:when>
 								<c:when test="${limit >= i }">
 									<li><a
-										href="${pageContext.request.contextPath }/board?a=list&page=${i }">${i }</a></li>
+										href="${pageContext.request.contextPath }/board?a=find&page=${i }&kwd=${kwd }">${i }</a></li>
 								</c:when>
 								<c:when test="${limit <= i }">
 									<li>${i }</li>
@@ -125,11 +124,11 @@
 						<c:choose>
 							<c:when test="${numberlimit == select }">
 								<li><a
-									href="${pageContext.request.contextPath }/board?a=list&page=${param.page+1 }"></a></li>
+									href="${pageContext.request.contextPath }/board?a=find&page=${param.page+1 }&kwd=${kwd }"></a></li>
 							</c:when>
 							<c:when test="${numberlimit != select }">
 								<li><a
-									href="${pageContext.request.contextPath }/board?a=list&page=${param.page+1 }">▶</a></li>
+									href="${pageContext.request.contextPath }/board?a=find&page=${param.page+1 }&kwd=${kwd }">▶</a></li>
 							</c:when>
 						</c:choose>
 

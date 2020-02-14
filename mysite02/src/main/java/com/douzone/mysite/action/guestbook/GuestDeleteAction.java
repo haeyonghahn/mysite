@@ -27,7 +27,6 @@ public class GuestDeleteAction implements Action {
 
 			new GuestBookRepository().delete(vo);
 
-			System.out.println("1231314141251251515");
 			WebUtil.redirect(request.getContextPath() + "/guestbook", request, response);
 		}
 		else {
