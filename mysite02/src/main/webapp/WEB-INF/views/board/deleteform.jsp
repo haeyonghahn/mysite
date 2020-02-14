@@ -15,10 +15,15 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 		<div id="content">
 			<div id="user">
-				<p class="jr-success">
-					회원가입을 축하합니다.
+				<p>
+					삭제하시겠습니까?
 					<br><br>
-					<a href="${pageContext.request.contextPath }/?a=loginform">로그인하기</a>
+					<form id="jr_delete" action="${pageContext.request.contextPath }/board?a=delete" method="post">
+						<input type="hidden" name="no" value="${no }">
+						<input type="hidden" name="title" value="삭제된 게시글입니다.">
+						<input type='hidden' name='state' value='yes'>			
+						<input type="submit" value="확인">
+					</form>
 				</p>				
 			</div>
 		</div>
