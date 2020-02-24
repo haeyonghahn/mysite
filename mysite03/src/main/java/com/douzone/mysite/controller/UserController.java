@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.douzone.mysite.service.UserService;
 import com.douzone.mysite.vo.UserVo;
@@ -47,6 +48,18 @@ public class UserController {
 			return "user/login";
 		}
 		session.setAttribute("authUser", authUser);
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/update", method=RequestMethod.GET)
+	public String update() {
+		return "/user/update";
+	}
+	
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String update(UserVo vo) {
+		System.out.println(vo);
+		userService.update(vo);
 		return "redirect:/";
 	}
 	

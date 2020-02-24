@@ -61,7 +61,7 @@ public class UserRepository {
 			conn = getConnection();
 
 			String sql =
-				"select no, name" +
+				"select no, name, email" +
 				"  from user" + 
 				" where email = ?" +
 				"   and password = ?";
@@ -74,10 +74,12 @@ public class UserRepository {
 			if(rs.next()) {
 				Long no = rs.getLong(1);
 				String name = rs.getString(2);
+				String email = rs.getString(3);
 
 				userVo = new UserVo();
 				userVo.setNo(no);
 				userVo.setName(name);
+				userVo.setEmail(email);
 			}
 		} catch (SQLException e) {
 			System.out.println("error :" + e);
