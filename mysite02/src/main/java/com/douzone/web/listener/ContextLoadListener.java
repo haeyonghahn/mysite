@@ -3,9 +3,8 @@ package com.douzone.web.listener;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 
-@WebListener
+//@WebListener
 public class ContextLoadListener implements ServletContextListener {
 
     // 어플리케이션이 올라갔을 때 (아까는 서블릿에서 초기화하는 것임. 이거는 톰캣에서 초기화. 범위가 더 넓다)
