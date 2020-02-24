@@ -15,8 +15,7 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
 		<div id="content">
 			<div id="user">
-				<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user">
-					<input type='hidden' name='a' value='update'/>
+				<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user/update">
 					<input type='hidden' name='no' value="${authUser.no }"/>
 					<label class="block-label" for="name">이름</label>
 					<input id="name" name="name" type="text" value="">
