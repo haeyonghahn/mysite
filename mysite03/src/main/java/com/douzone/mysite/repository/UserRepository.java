@@ -1,6 +1,6 @@
 package com.douzone.mysite.repository;
 
-import java.sql.Connection;
+//import java.sql.Connection;
 import java.util.HashMap;
 //import java.sql.DriverManager;
 //import java.sql.PreparedStatement;

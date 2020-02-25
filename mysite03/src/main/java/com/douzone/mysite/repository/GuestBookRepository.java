@@ -5,10 +5,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
+//import java.sql.Timestamp;
+//import java.util.ArrayList;
 import java.util.List;
 
+//import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.douzone.mysite.exception.GuestbookRepositoryException;
@@ -17,54 +21,58 @@ import com.douzone.mysite.vo.GuestBookVo;
 @Repository
 public class GuestBookRepository {
 	
+	@Autowired
+	private SqlSession sqlSession;
+	
 	public List<GuestBookVo> findAll() {
-
-		Connection connection = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		return sqlSession.selectList("guestbook.findAll");
 		
-		List<GuestBookVo> list = new ArrayList<>();
-
-		try {
-			connection = getConnection();
-
-			String sql = "select no, name, contents, password, reg_date from guestbook order by reg_date desc";
-			pstmt = connection.prepareStatement(sql);
-
-			rs = pstmt.executeQuery();
-
-			while(rs.next()) {
-				Long no = rs.getLong(1);
-				String name = rs.getString(2);
-				String contents = rs.getString(3);
-				String password = rs.getString(4);
-				Timestamp regDate = rs.getTimestamp(5);
-
-				GuestBookVo vo = new GuestBookVo();
-				vo.setNo(no);
-				vo.setName(name);
-				vo.setContents(contents);
-				vo.setPassword(password);
-				vo.setRegDate(regDate);
-				
-				list.add(vo);
-			}
-
-		} catch (SQLException e) {
-			throw new GuestbookRepositoryException(e.getMessage());	
-		} finally {
-			try {
-				// 6. 자원정리
-				if (connection != null)
-					connection.close();
-				if(pstmt != null)
-					pstmt.close();
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return list;
+//		Connection connection = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		List<GuestBookVo> list = new ArrayList<>();
+//
+//		try {
+//			connection = getConnection();
+//
+//			String sql = "select no, name, contents, password, reg_date from guestbook order by reg_date desc";
+//			pstmt = connection.prepareStatement(sql);
+//
+//			rs = pstmt.executeQuery();
+//
+//			while(rs.next()) {
+//				Long no = rs.getLong(1);
+//				String name = rs.getString(2);
+//				String contents = rs.getString(3);
+//				String password = rs.getString(4);
+//				Timestamp regDate = rs.getTimestamp(5);
+//
+//				GuestBookVo vo = new GuestBookVo();
+//				vo.setNo(no);
+//				vo.setName(name);
+//				vo.setContents(contents);
+//				vo.setPassword(password);
+//				vo.setRegDate(regDate);
+//				
+//				list.add(vo);
+//			}
+//
+//		} catch (SQLException e) {
+//			throw new GuestbookRepositoryException(e.getMessage());	
+//		} finally {
+//			try {
+//				// 6. 자원정리
+//				if (connection != null)
+//					connection.close();
+//				if(pstmt != null)
+//					pstmt.close();
+//
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return list;
 	}
 
 	public int insert(GuestBookVo GuestBookVo) {
