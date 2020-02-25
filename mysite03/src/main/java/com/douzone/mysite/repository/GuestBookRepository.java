@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.douzone.mysite.exception.GuestbookRepositoryException;
 import com.douzone.mysite.vo.GuestBookVo;
 
 @Repository
@@ -50,7 +51,7 @@ public class GuestBookRepository {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("error : " + e);
+			throw new GuestbookRepositoryException(e.getMessage());	
 		} finally {
 			try {
 				// 6. 자원정리
@@ -86,7 +87,7 @@ public class GuestBookRepository {
 			result = count;
 
 		} catch (SQLException e) {
-			System.out.println("error : " + e);
+			throw new GuestbookRepositoryException(e.getMessage());	
 		} finally {
 			try {
 				// 6. 자원정리
@@ -120,7 +121,7 @@ public class GuestBookRepository {
 			result = count == 1;
 
 		} catch (SQLException e) {
-			System.out.println("error : " + e);
+			throw new GuestbookRepositoryException(e.getMessage());	
 		} finally {
 			try {
 				// 6. 자원정리
@@ -158,7 +159,8 @@ public class GuestBookRepository {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("error : " + e);
+			throw new GuestbookRepositoryException(e.getMessage());	
+			
 		} finally {
 			try {
 				// 6. 자원정리
@@ -187,10 +189,8 @@ public class GuestBookRepository {
 			System.out.println("연결성공!");
 
 		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패 : " + e);
-		} catch (SQLException e) {
-			System.out.println("error : " + e);
-		} 
+			throw new GuestbookRepositoryException(("드라이버 로딩 실패 : " + e));
+		}
 		return connection;
 	}
 }
