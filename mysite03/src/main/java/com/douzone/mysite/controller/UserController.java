@@ -74,8 +74,8 @@ public class UserController {
 		if (authUser == null)
 			return "redirect:/";
 		//////////////////////////////////////////////////////////
-		
-		userService.update(userVo);
+		userVo.setNo(authUser.getNo());
+		userService.updateUser(userVo);
 		return "redirect:/user/update";
 	}
 

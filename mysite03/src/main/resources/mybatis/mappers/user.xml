@@ -28,4 +28,19 @@
 		select name, email, gender from user where no = #{no }
 		]]>
 	</select>
+	
+	<update id="update" parameterType="uservo">
+		<choose>
+			<when test='password != ""'>
+				<![CDATA[
+				update user set name = #{name }, password = #{password }, gender = #{gender } where no = #{no }
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+				update user set name = #{name }, gender = #{gender } where no = #{no }
+				]]>
+			</otherwise>
+		</choose>
+	</update>
 </mapper>
