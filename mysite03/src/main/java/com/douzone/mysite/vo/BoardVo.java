@@ -1,22 +1,16 @@
 package com.douzone.mysite.vo;
 
-import java.sql.Timestamp;
-
 public class BoardVo {
-
 	private Long no;
 	private String title;
 	private String contents;
-	private int hit;
-	private Timestamp regDate;
-	private int gNo;
-	private int oNo;
-	private int depth;
+	private String regDate;
+	private Integer hit;
+	private Integer groupNo;
+	private Integer orderNo;
+	private Integer depth;
 	private Long userNo;
-	private String state;
-	
-	private String name;
-	
+	private String userName;
 	public Long getNo() {
 		return no;
 	}
@@ -35,34 +29,34 @@ public class BoardVo {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public int getHit() {
-		return hit;
-	}
-	public void setHit(int hit) {
-		this.hit = hit;
-	}
-	public Timestamp getRegDate() {
+	public String getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(Timestamp regDate) {
+	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-	public int getgNo() {
-		return gNo;
+	public Integer getHit() {
+		return hit;
 	}
-	public void setgNo(int gNo) {
-		this.gNo = gNo;
+	public void setHit(Integer hit) {
+		this.hit = hit;
 	}
-	public int getoNo() {
-		return oNo;
+	public Integer getGroupNo() {
+		return groupNo;
 	}
-	public void setoNo(int oNo) {
-		this.oNo = oNo;
+	public void setGroupNo(Integer groupNo) {
+		this.groupNo = groupNo;
 	}
-	public int getDepth() {
+	public Integer getOrderNo() {
+		return orderNo;
+	}
+	public void setOrderNo(Integer orderNo) {
+		this.orderNo = orderNo;
+	}
+	public Integer getDepth() {
 		return depth;
 	}
-	public void setDepth(int depth) {
+	public void setDepth(Integer depth) {
 		this.depth = depth;
 	}
 	public Long getUserNo() {
@@ -71,23 +65,16 @@ public class BoardVo {
 	public void setUserNo(Long userNo) {
 		this.userNo = userNo;
 	}
-	
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getState() {
-		return state;
-	}
-	public void setState(String state) {
-		this.state = state;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	@Override
 	public String toString() {
-		return "BoardVo [no=" + no + ", title=" + title + ", contents=" + contents + ", hit=" + hit + ", regDate=" + regDate
-				+ ", gNo=" + gNo + ", oNo=" + oNo + ", depth=" + depth + ", userNo=" + userNo + ", state=" + state + "]";
+		return "BoardVo [no=" + no + ", title=" + title + ", contents=" + contents + ", regDate=" + regDate + ", hit="
+				+ hit + ", groupNo=" + groupNo + ", orderNo=" + orderNo + ", depth=" + depth + ", userNo=" + userNo
+				+ ", userName=" + userName + "]";
 	}
 }

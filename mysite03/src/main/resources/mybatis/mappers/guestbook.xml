@@ -2,9 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="guestbook">
-	<select id="findAll" parameterType="guestbookvo" resultType="guestbookvo">
+	<select id="findAll" resultType="guestbookvo">
 		<![CDATA[
-		select no, name, contents, password, reg_date from guestbook order by reg_date desc
+		select no, name, contents, password, date_format(reg_date, '%Y-%m-%d %h:%i:%s') as regDate from guestbook order by reg_date desc
+		]]>
+	</select>
+	
+	<select id="findAll2" resultType="guestbookvo" parameterType="Long">
+		<![CDATA[
+		select no, name, contents, password, date_format(reg_date, '%Y-%m-%d %h:%i:%s') as regDate 
+		from guestbook
+		]]>
+		<if test='no > 0'> 
+			<![CDATA[
+			where no < #{_parameter }
+			]]>
+		</if>
+		<![CDATA[
+		order by no desc
+		limit 0, 3
 		]]>
 	</select>
 </mapper>

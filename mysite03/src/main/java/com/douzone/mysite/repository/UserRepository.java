@@ -172,7 +172,19 @@ public class UserRepository {
 //		return userVo;
 	}
 	
-	public void update(UserVo userVo) {
+	public int update(UserVo userVo) {
+		//// 이렇게 작성되도 괜찮지만 동적 쿼리를 이용하여 작성할 것 ///////
+//		int count = 0;
+//		if("".equals(userVo.getPassword())) {
+//			count = sqlSession.update("user.update1");
+//		}
+//		else {
+//			count = sqlSession.update("user.update2");
+//		}
+		////////////////////////////////////////////////////
+		
+		return sqlSession.update("user.update", userVo);
+
 //		Connection connection = null;
 //		PreparedStatement pstmt = null;
 //		
