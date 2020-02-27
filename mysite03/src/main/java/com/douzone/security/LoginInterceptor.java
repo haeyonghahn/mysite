@@ -18,6 +18,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
@@ -26,7 +27,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		vo.setPassword(password);
 		
 		UserVo authUser = userService.getUser(vo);
-		
 		if(authUser == null) {
 			request.setAttribute("userVo", vo);
 			request
@@ -35,7 +35,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 		
-		System.out.println("--------> authUser:" + authUser);
+		
 		// session 처리
 		HttpSession session = request.getSession(true);
 		session.setAttribute("authUser", authUser);

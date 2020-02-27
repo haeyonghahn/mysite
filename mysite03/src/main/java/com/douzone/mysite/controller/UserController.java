@@ -1,7 +1,5 @@
 package com.douzone.mysite.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +11,6 @@ import com.douzone.mysite.vo.UserVo;
 import com.douzone.security.Auth;
 import com.douzone.security.AuthUser;
 
-@Auth
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -68,14 +65,16 @@ public class UserController {
 
 	@Auth
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String update(HttpSession session, UserVo userVo) {
+	public String update(@AuthUser UserVo authUser, UserVo userVo) {
 		/////////////////////// 접근제어 ////////////////////////////
-		UserVo authUser = (UserVo) session.getAttribute("authUser");
+//		UserVo authUser = (UserVo) session.getAttribute("authUser");
 //		if (authUser == null)
 //			return "redirect:/";
 		//////////////////////////////////////////////////////////
 		userVo.setNo(authUser.getNo());
 		userService.updateUser(userVo);
+		
+		authUser.setName(userVo.getName());
 		return "redirect:/user/update";
 	}
 

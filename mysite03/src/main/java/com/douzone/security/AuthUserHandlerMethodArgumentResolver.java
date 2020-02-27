@@ -21,7 +21,7 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 		NativeWebRequest webRequest,
 		WebDataBinderFactory binderFactory) throws Exception {
 		
-		if(!supportsParameter(parameter)) {
+		if(supportsParameter(parameter) == false) {
 			return WebArgumentResolver.UNRESOLVED;
 		}
 		
@@ -31,6 +31,7 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 			return null;
 		}
 		
+		System.out.println("asdf");
 		return session.getAttribute("authUser");
 	}
 
@@ -44,10 +45,11 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 		}
 		
 		// 파라미터 타입이 UserVo가 아니면,
-		if(!parameter.getParameterType().equals(UserVo.class)) {
+		if(parameter.getParameterType().equals(UserVo.class) == false) {
 			return false;
 		}
 		
 		return true;
 	}
+	
 }
