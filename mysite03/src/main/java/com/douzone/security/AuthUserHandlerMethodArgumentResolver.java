@@ -31,7 +31,6 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 			return null;
 		}
 		
-		System.out.println("asdf");
 		return session.getAttribute("authUser");
 	}
 

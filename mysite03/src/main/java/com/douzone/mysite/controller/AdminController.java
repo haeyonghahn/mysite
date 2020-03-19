@@ -38,8 +38,13 @@ public class AdminController {
 			, @RequestParam(value="welcomeMessage") String welcomeMessage
 			, @RequestParam(value="description") String description
 			, @RequestParam(value="file1") MultipartFile multipartFile, Model model) {
-			
+		
 		String url = fileUploadService.restore(multipartFile);
+			
+		if(url == null) {
+			SiteVo siteVo = siteService.getList();
+			url = siteVo.getProfile();
+		}
 		
 		SiteVo siteVo = new SiteVo();
 		siteVo.setTitle(title);
