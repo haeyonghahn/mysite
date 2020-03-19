@@ -1,5 +1,7 @@
 package com.douzone.mysite.controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.ibatis.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +20,6 @@ public class MainController {
 	public String index(Model model) {
 		
 		SiteVo siteVo = siteService.getList();
-		
 		model.addAttribute("siteVo", siteVo);
 		
 		return "main/index";
