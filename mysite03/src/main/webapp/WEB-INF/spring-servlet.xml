@@ -10,6 +10,11 @@
    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<!-- auto proxy -->
+	<aop:aspectj-autoproxy>
+	
+	</aop:aspectj-autoproxy>
+
 	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
 	<mvc:annotation-driven> 
 		<mvc:argument-resolvers>
@@ -70,7 +75,7 @@
 	</bean>
 	
 	<!-- mvc resources -->
-	<mvc:resources location="file:/mysite-uploads/" mapping="/images/**">
+	<mvc:resources location="file:/mysite-uploads/" mapping="/image/**">
 	
 	</mvc:resources>
 </beans>
