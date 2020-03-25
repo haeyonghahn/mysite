@@ -10,59 +10,6 @@
    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- auto proxy -->
-	<aop:aspectj-autoproxy>
-
-	</aop:aspectj-autoproxy>
-
-	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
-	<mvc:annotation-driven>
-		<mvc:argument-resolvers>
-			<bean
-				class="com.douzone.security.AuthUserHandlerMethodArgumentResolver"></bean>
-		</mvc:argument-resolvers>
-	</mvc:annotation-driven>
-
-	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
-	<mvc:default-servlet-handler />
-
-	<!-- Interceptors -->
-	<mvc:interceptors>
-		<!-- <mvc:interceptor> <mvc:mapping path="/board/**"/> <bean class="com.douzone.mysite.interceptor.MyInterceptor02"></bean> 
-			</mvc:interceptor> -->
-		<mvc:interceptor>
-			<mvc:mapping path="/user/auth" />
-			<bean class="com.douzone.security.LoginInterceptor"></bean>
-		</mvc:interceptor>
-
-		<mvc:interceptor>
-			<mvc:mapping path="/user/logout" />
-			<bean class="com.douzone.security.LogoutInterceptor"></bean>
-		</mvc:interceptor>
-
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/user/auth" />
-			<mvc:exclude-mapping path="/user/logout" />
-			<mvc:exclude-mapping path="/assets/**" />
-			<bean class="com.douzone.security.AuthInterceptor"></bean>
-		</mvc:interceptor>
-	</mvc:interceptors>
-
-	<context:annotation-config />
-	<context:component-scan
-		base-package="com.douzone.mysite.controller, com.douzone.mysite.exception" />
-
-	<!-- ViewResolver 설정 -->
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/views/" />
-		<property name="suffix" value=".jsp" />
-		<property name="order" value="1" />
-	</bean>
-
 	<!-- 멀티파트 리졸버 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -73,12 +20,6 @@
 		<!-- defaultEncoding -->
 		<property name="defaultEncoding" value="utf-8" />
 	</bean>
-
-	<!-- mvc resources -->
-	<mvc:resources location="file:/mysite-uploads/"
-		mapping="/image/**">
-
-	</mvc:resources>
 
 	<!-- MessageSource -->
 	<bean id="messageSource"
