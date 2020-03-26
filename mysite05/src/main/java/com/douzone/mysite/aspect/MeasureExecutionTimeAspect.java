@@ -10,7 +10,7 @@ import org.springframework.util.StopWatch;
 @Component
 public class MeasureExecutionTimeAspect {
 
-	@Around("execution(* *..*.repository.*.*(..)))
+	@Around("execution(* *..*.repository.*.*(..)) || execution(* *..*.controller.*.*(..))")
 	public Object aroundAdvice(ProceedingJoinPoint pjp) throws Throwable {
 		
 		StopWatch sw = new StopWatch();		
