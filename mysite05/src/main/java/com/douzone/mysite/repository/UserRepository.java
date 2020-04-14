@@ -62,6 +62,10 @@ public class UserRepository {
 //		return count;
 	}
 
+	public UserVo find(String email) {
+		return sqlSession.selectOne("user.findByEmail", email);
+	}
+	
 	public UserVo findByEmailAndPassword(UserVo vo) {
 		return sqlSession.selectOne("user.findByEmailAndPassword", vo);
 		
