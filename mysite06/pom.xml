@@ -81,6 +81,12 @@
 			<artifactId>jstl</artifactId>
 		</dependency>
 		
+		<!-- jackson -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		</dependency>
+		
 		<!-- tomcat jasper : jsp를 servlet으로 바꿔주는 것 -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>

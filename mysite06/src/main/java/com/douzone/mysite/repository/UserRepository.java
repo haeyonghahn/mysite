@@ -172,6 +172,10 @@ public class UserRepository {
 //		return userVo;
 	}
 	
+	public UserVo find(String email) {
+		return sqlSession.selectOne("user.findByEmail", email);
+	}
+	
 	public int update(UserVo userVo) {
 		//// 이렇게 작성되도 괜찮지만 동적 쿼리를 이용하여 작성할 것 ///////
 //		int count = 0;
