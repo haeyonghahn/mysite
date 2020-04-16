@@ -35,4 +35,8 @@ public class GuestBookService {
 	public List<GuestBookVo> getMessageList(Long startNo) {
 		return guestBookRepository.findAll(startNo);
 	}
+
+	public boolean deleteMessage(Long no, String password) {
+		return 1 == guestBookRepository.delete(new GuestBookVo(no, password));
+	}
 }

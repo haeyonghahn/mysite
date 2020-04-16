@@ -21,22 +21,22 @@ import com.douzone.mysite.vo.GuestBookVo;
 
 @Repository
 public class GuestBookRepository {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	public List<GuestBookVo> findAll() {
-		
+
 		StopWatch sw = new StopWatch();
 		sw.start();
 		List<GuestBookVo> list = sqlSession.selectList("guestbook.findAll");
 		sw.stop();
-		
+
 		Long totalTime = sw.getTotalTimeMillis();
 		System.out.println(totalTime);
 
 		return list;
-		
+
 //		Connection connection = null;
 //		PreparedStatement pstmt = null;
 //		ResultSet rs = null;
@@ -84,7 +84,7 @@ public class GuestBookRepository {
 //		}
 //		return list;
 	}
-	
+
 	public List<GuestBookVo> findAll(Long startNo) {
 		return sqlSession.selectList("guestbook.findAllByNo", startNo);
 	}
@@ -109,13 +109,13 @@ public class GuestBookRepository {
 			result = count;
 
 		} catch (SQLException e) {
-			throw new GuestbookRepositoryException(e.getMessage());	
+			throw new GuestbookRepositoryException(e.getMessage());
 		} finally {
 			try {
 				// 6. 자원정리
 				if (connection != null)
 					connection.close();
-				if(pstmt != null)
+				if (pstmt != null)
 					pstmt.close();
 
 			} catch (SQLException e) {
@@ -124,7 +124,7 @@ public class GuestBookRepository {
 		}
 		return result;
 	}
-	
+
 	public boolean delete(Long no) {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -135,7 +135,7 @@ public class GuestBookRepository {
 
 			String sql = "delete from guestbook where no = ?";
 			pstmt = connection.prepareStatement(sql);
-			
+
 			pstmt.setLong(1, no);
 			int count = pstmt.executeUpdate();
 
@@ -143,13 +143,13 @@ public class GuestBookRepository {
 			result = count == 1;
 
 		} catch (SQLException e) {
-			throw new GuestbookRepositoryException(e.getMessage());	
+			throw new GuestbookRepositoryException(e.getMessage());
 		} finally {
 			try {
 				// 6. 자원정리
 				if (connection != null)
 					connection.close();
-				if(pstmt != null)
+				if (pstmt != null)
 					pstmt.close();
 
 			} catch (SQLException e) {
@@ -158,37 +158,36 @@ public class GuestBookRepository {
 		}
 		return result;
 	}
-	
+
 	public String find(Long no) {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		String password = null;
-		
-		
+
 		try {
 			connection = getConnection();
 
 			String sql = "select password from guestbook where no = ?";
 			pstmt = connection.prepareStatement(sql);
 			pstmt.setLong(1, no);
-			
+
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				password = rs.getString(1);
 			}
 
 		} catch (SQLException e) {
-			throw new GuestbookRepositoryException(e.getMessage());	
-			
+			throw new GuestbookRepositoryException(e.getMessage());
+
 		} finally {
 			try {
 				// 6. 자원정리
 				if (connection != null)
 					connection.close();
-				if(pstmt != null)
+				if (pstmt != null)
 					pstmt.close();
 
 			} catch (SQLException e) {
@@ -197,7 +196,7 @@ public class GuestBookRepository {
 		}
 		return password;
 	}
-	
+
 	private Connection getConnection() throws SQLException {
 		Connection connection = null;
 
@@ -216,5 +215,7 @@ public class GuestBookRepository {
 		return connection;
 	}
 
-	
+	public int delete(GuestBookVo guestBookVo) {
+		return sqlSession.delete("guestbook.deleteMessage", guestBookVo);
+	}
 }
