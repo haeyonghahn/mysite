@@ -20,7 +20,7 @@ $(function(){
 			url: '${pageContext.request.contextPath }/api/guestbook/list/' + startNo,
 			async: true,
 			type: 'get',
-			dataType: 'json'
+			dataType: 'json',
 			data: '',
 			success: function(response){
 				console.log(reponse);
