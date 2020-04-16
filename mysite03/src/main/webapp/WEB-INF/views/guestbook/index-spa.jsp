@@ -20,11 +20,22 @@
 (function($) {
 	$.fn.hello = function() {
 		console.log(this.length);
-		console.log("hello #");
-		
+		console.log("hello #" + this[0].title);
 	}
 })(jQuery);
-
+			
+(function($) {
+	$.fn.flash = function() {
+		this.click(function() {
+			var $that = $(this);
+			var isBlink = false;
+			setInterval(function() {
+				$that.css("backgroundColor", isBlink ? "#f00" : "#aaa");
+				isBlink = !isBlink;
+			}, 1000);
+		});
+	}
+})(jQuery);
 </script>
 
 <script>
@@ -235,7 +246,8 @@
 		fetchList();
 		
 		// jquery plugin test
-		$("#btn-fetch").hello();
+		$(".btn-fetch").hello();
+		$(".btn-fetch").flash();
 	});
 </script>
 </head>
@@ -264,9 +276,10 @@
 					<button class='btn-fetch' title="다음 가져오기">다음 가져오기</button>
 				</div>
 			</div>
-			<div id="dialog-delete-form" class="delete-form" title="메세지 삭제" style="display: none">
+			<div id="dialog-delete-form" class="delete-form" title="메세지 삭제"
+				style="display: none">
 				<p class="validateTips normal">작성시 입력했던 비밀번호를 입력하세요.</p>
-				<p class="validateTips error" style="display:none;">비밀번호가 틀립니다.</p>
+				<p class="validateTips error" style="display: none;">비밀번호가 틀립니다.</p>
 				<form>
 					<input type="password" id="password-delete" value=""
 						class="text ui-widget-content ui-corner-all"> <input
