@@ -84,6 +84,10 @@ public class GuestBookRepository {
 //		}
 //		return list;
 	}
+	
+	public List<GuestBookVo> findAll(Long startNo) {
+		return sqlSession.selectList("guestbook.findAllByNo", startNo);
+	}
 
 	public int insert(GuestBookVo GuestBookVo) {
 		Connection connection = null;
@@ -211,4 +215,6 @@ public class GuestBookRepository {
 		}
 		return connection;
 	}
+
+	
 }
