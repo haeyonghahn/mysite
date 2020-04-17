@@ -211,4 +211,12 @@ public class GuestBookRepository {
 		}
 		return connection;
 	}
+	
+	public List<GuestBookVo> findAll(Long startNo) {
+		return sqlSession.selectList("guestbook.findAllByNo", startNo);
+	}
+	
+	public int delete(GuestBookVo guestBookVo) {
+		return sqlSession.delete("guestbook.deleteMessage", guestBookVo);
+	}
 }
